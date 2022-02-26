@@ -44,6 +44,15 @@ You can view the project layout through the links below:
 
 Remembering that you need to have a [Figma](http://figma.com/) account to access it.
 
+## 🛠️ Adjustments and improvements
+
+Next updates will focus on the following tasks:
+
+- [ ] Use [react-toastify](https://fkhadra.github.io/react-toastify/introduction/) instead of navigator "alert()". 
+- [ ] Use [react-modal](https://reactcommunity.org/react-modal/) instead of navigator "confirm()". 
+- [ ] Responsive APP.
+- [ ] Dark and Light theme.
+- [ ] Styled Components.
 
 ---
 
