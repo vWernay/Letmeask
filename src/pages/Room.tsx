@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+
 import cx from 'classnames';
 
 import logoImg from '../assets/images/logo.svg'
@@ -29,7 +31,12 @@ export function Room() {
     async function handleSendQuestion(event: FormEvent) {
         event.preventDefault();
 
-        if (newQuestion.trim() === '') return;
+        if (newQuestion.trim() === '') {
+            toast.error("Enter a question!", {
+                autoClose: 2500
+            });
+            return;
+        }
 
         if (!user) {
             throw new Error('You must be logged in!');
@@ -48,6 +55,10 @@ export function Room() {
         await push(ref(database, `rooms/${roomId}/questions`), question);
 
         setNewQuestion('');
+
+        toast.success("Question sended successfully!", {
+            autoClose: 2500
+        });
     }
 
     async function handleLikeQuestion(questionId: string, likeId: string | undefined) {

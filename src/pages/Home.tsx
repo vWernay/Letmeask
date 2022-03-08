@@ -1,6 +1,8 @@
 import { useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+
 import ilustrattionImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg'
@@ -27,17 +29,24 @@ export function Home() {
     async function handleJoinRoom(event: FormEvent) {
         event.preventDefault();
 
-        if (roomCode.trim() === '') return;
+        if (roomCode.trim() === '') { 
+            toast.error("Enter a code.", { autoClose: 2500 }); 
+            return; 
+        }
 
         const roomRef = await get(ref(database, `rooms/${roomCode}`));
 
         if (!roomRef.exists()) {
-            alert('Room does not exists.');
+            toast.error("Room does not exists.", {
+                autoClose: 2500
+            });
             return;
         }
 
         if (roomRef.val().closedAt) {
-            alert('Room already closed.');
+            toast.error("Room already closed.", {
+                autoClose: 2500
+            });
             return;
         }
 

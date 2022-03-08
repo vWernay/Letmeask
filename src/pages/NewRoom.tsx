@@ -1,6 +1,8 @@
 import { FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+
 import ilustrattionImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 
@@ -18,7 +20,12 @@ export function NewRoom() {
     async function handleCreateRoom(event: FormEvent) {
         event.preventDefault();
 
-        if (newRoom.trim() === '') return;
+        if (newRoom.trim() === '') {
+            toast.error("Enter a code!", {
+                autoClose: 2500
+            });
+            return;
+        }
 
         const roomRef = ref(database, 'rooms');
 
@@ -26,6 +33,10 @@ export function NewRoom() {
             title: newRoom,
             authorId: user?.id,
         }));
+
+        toast.success("Room created successfully!", {
+            autoClose: 2500
+        });
 
         navigate(`/rooms/${firebaseRoom.key}`);
     }

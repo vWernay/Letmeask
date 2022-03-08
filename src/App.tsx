@@ -4,11 +4,15 @@ import { NewRoom } from './pages/NewRoom';
 import { Room } from './pages/Room';
 import { AdminRoom } from './pages/AdminRoom';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { AuthContextProvider } from './contexts/AuthContext';
 
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer />
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={<Home />} />
